@@ -3,12 +3,11 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function BasicCard({ data }) {
   return (
-    <Card sx={{ minWidth: 275, mb: 2 }}>
+    <Card sx={{ minWidth: 275, mb: 2, overflow: "hidden" }} elevation={0}>
       {" "}
       {/* Add margin for spacing between cards */}
       <CardContent>
@@ -21,16 +20,13 @@ export default function BasicCard({ data }) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {data.tireBrand}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" sx={{ fontWeight: "bold" }}>
           Tire Size: {data.tireSize}
           <br />
           Location Note: {data.locationNote}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>{" "}
-        {/* Adjust or remove as needed */}
-      </CardActions>
+      <CardActions></CardActions>
     </Card>
   );
 }

@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import SearchAutocomplete from "./SearchAutocomplete";
 import axios from "axios";
 import BasicCard from "./BasicCard";
+import { API_ENDPOINTS } from "../apiConfig";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -33,9 +34,9 @@ export default function Navbar() {
       return;
     }
     try {
-      const response = await axios.get(
-        `http://localhost:2500/api/customer-tires/search?q=${searchText}`
-      );
+      const response = await axios.get(API_ENDPOINTS.SEARCH_CUSTOMER_TIRES, {
+        params: { q: searchText },
+      });
       setSearchResults(response.data);
     } catch (error) {
       console.error("Failed to fetch search results:", error);
@@ -75,11 +76,9 @@ export default function Navbar() {
             component="div"
             sx={{
               flexGrow: 1,
-              textAlign: "center",
               fontFamily: "sans-serif",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              marginLeft: "10px",
             }}
           >
             Costas Mobile
@@ -90,10 +89,23 @@ export default function Navbar() {
           </IconButton>
         </Toolbar>
       </Container>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
-        <DialogTitle>Search</DialogTitle>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+        maxWidth="lg"
+        sx={{
+          "& .MuiPaper-root": {
+            // Targeting the Dialog's Paper component
+            border: "1px solid black",
+            borderRadius: "15px",
+          },
+        }}
+      >
+        <DialogTitle sx={{ fontWeight: "bold" }}>Search</DialogTitle>
         <DialogContent>
           <SearchAutocomplete onSearchChange={handleSearchChange} />
+          <br />
           {searchResults.map((result) => (
             <BasicCard key={result._id} data={result} />
           ))}

@@ -18,6 +18,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { API_ENDPOINTS } from "../apiConfig";
 
 export default function BasicTable() {
   const [rows, setRows] = useState([]);
@@ -30,7 +31,8 @@ export default function BasicTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios("http://localhost:2500/api/customer-tires");
+        const result = await axios(API_ENDPOINTS.FETCH_CUSTOMER_TIRES);
+
         // Assuming result.data is an array of objects
         const sortedData = result.data.sort((a, b) => {
           // Assuming 'customerName' is the key you want to sort by
@@ -57,9 +59,10 @@ export default function BasicTable() {
   const handleEditSubmit = async () => {
     try {
       await axios.put(
-        `http://localhost:2500/api/customer-tires/${currentEdit._id}`,
+        API_ENDPOINTS.UPDATE_CUSTOMER_TIRE(currentEdit._id),
         currentEdit
       );
+
       setSnackbarMessage("Customer updated successfully");
       setSnackbarSeverity("success");
       setEditOpen(false);
@@ -84,7 +87,7 @@ export default function BasicTable() {
     );
     if (isConfirmed) {
       try {
-        await axios.delete(`http://localhost:2500/api/customer-tires/${id}`);
+        await axios.delete(API_ENDPOINTS.DELETE_CUSTOMER_TIRE(id));
         setSnackbarMessage("Customer deleted successfully");
         setSnackbarSeverity("success");
         setRows(rows.filter((row) => row._id !== id));

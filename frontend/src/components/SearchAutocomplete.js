@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
+import { API_ENDPOINTS } from "../apiConfig";
 
 export default function SearchAutocomplete({ onSearchChange }) {
   const [inputValue, setInputValue] = useState("");
@@ -12,7 +13,7 @@ export default function SearchAutocomplete({ onSearchChange }) {
       if (inputValue) {
         try {
           const response = await axios.get(
-            `http://localhost:2500/api/customer-tires/search?q=${inputValue}`
+            `${API_ENDPOINTS.SEARCH_CUSTOMER_TIRES}?q=${inputValue}`
           );
           setOptions(response.data);
         } catch (error) {

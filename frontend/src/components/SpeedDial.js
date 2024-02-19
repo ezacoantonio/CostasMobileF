@@ -13,6 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { API_ENDPOINTS } from "../apiConfig";
 
 export default function BasicSpeedDial() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -45,7 +46,7 @@ export default function BasicSpeedDial() {
 
   const handleAddCustomer = async () => {
     try {
-      await axios.post("http://localhost:2500/api/customer-tires", formData);
+      await axios.post(API_ENDPOINTS.ADD_CUSTOMER_TIRE, formData);
       setSnackbarMessage("Customer added successfully!");
       setSnackbarSeverity("success");
       setOpenDialog(false);
@@ -75,8 +76,19 @@ export default function BasicSpeedDial() {
           onClick={handleClickOpen}
         />
       </SpeedDial>
-      <Dialog open={openDialog} onClose={handleClose} fullWidth>
-        <DialogTitle>Add New Customer</DialogTitle>
+      <Dialog
+        open={openDialog}
+        onClose={handleClose}
+        fullWidth
+        sx={{
+          "& .MuiPaper-root": {
+            // Targeting the Dialog's Paper component
+            border: "1px solid black",
+            borderRadius: "15px",
+          },
+        }}
+      >
+        <DialogTitle sx={{ fontWeight: "bold" }}>Add New Customer</DialogTitle>
         <DialogContent>
           {Object.keys(formData).map((key) => (
             <TextField

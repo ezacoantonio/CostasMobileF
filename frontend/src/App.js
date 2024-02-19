@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import BasicTable from "./components/BasicTable";
 import axios from "axios";
 import BasicSpeedDial from "./components/SpeedDial";
+import { API_ENDPOINTS } from "./apiConfig";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -13,7 +14,7 @@ function App() {
 
   const fetchAllRecords = async () => {
     try {
-      const result = await axios("http://localhost:2500/api/customer-tires");
+      const result = await axios(API_ENDPOINTS.FETCH_CUSTOMER_TIRES);
       setSearchResults(result.data);
     } catch (error) {
       console.error("Failed to fetch data:", error);
