@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:2500/api";
+//const BASE_URL = "http://localhost:2500/api";
+const BASE_URL = "https://cmb-3dk3.onrender.com/api";
 
 export const API_ENDPOINTS = {
   FETCH_CUSTOMER_TIRES: `${BASE_URL}/customer-tires`,
