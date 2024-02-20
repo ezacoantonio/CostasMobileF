@@ -59,7 +59,7 @@ export default function BasicSpeedDial() {
   };
 
   return (
-    <Box sx={{ position: "absolute", bottom: 16, right: 16 }}>
+    <Box sx={{ position: "fixed", bottom: 16, right: 16 }}>
       <SpeedDial
         ariaLabel="SpeedDial add customer"
         sx={{
